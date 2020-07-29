@@ -553,7 +553,15 @@ def get_submission(id):
 
 
 if __name__=='__main__':
+    import argparse
+    parser = argparse.ArgumentParser(description='Flask web server.')
+    parser.add_argument("-o", "--host", default='0.0.0.0',
+                        help="The web server host, default is 8080.")
+    parser.add_argument("-p", "--port", default='8080',
+                        help="The web server port, default is 8080.")
+    args = parser.parse_args()
     
+
     evalModule = importlib.import_module(evaluation_script)
     try:
         for module,alias in evalModule.evaluation_imports().items():
@@ -569,7 +577,7 @@ if __name__=='__main__':
     print("***********************************************")
     print("RRC Standalone Task")
     print("-----------------------------------------------")
-    print('Command line client:\ncurl -F "submissionFile=submit.zip" http://127.0.0.1:8080/evaluate')
-    print("\nGUI client:firefox http://127.0.0.1:8080")
+    print('Command line client:\ncurl -F "submissionFile=submit.zip" http://127.0.0.1:{}/evaluate'.format(args.port))
+    print("\nGUI client:firefox http://127.0.0.1:{}".format(args.port))
     print("-----------------------------------------------")
-    run(host='0.0.0.0', port=8080, debug=True)
+    run(host=args.host, port=args.port, debug=True)

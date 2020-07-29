@@ -66,7 +66,7 @@ def load_zip_file(file,fileNameRegExp='',allEntries=False):
             # else:
             #     if len(m.groups())>0:
             #         keyName = m.group(1)
-        keyName = name.replace('gt_', '').replace('res_', '').replace('.txt', '')
+        keyName = name.replace('gt_', '').replace('res_', '').replace('.txt', '').replace('.csv', '')
         
         if addFile:
             pairs.append( [ keyName , archive.read(name)] )
