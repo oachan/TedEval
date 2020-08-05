@@ -120,7 +120,7 @@ def validate_tl_line(line,LTRB=True,withTranscription=True,withConfidence=True,i
     get_tl_line_values(line,LTRB,withTranscription,withConfidence,imWidth,imHeight)
     
    
-def get_tl_line_values(line,LTRB=True,withTranscription=False,withConfidence=False,imWidth=0,imHeight=0):
+def get_tl_line_values(data,LTRB=True,withTranscription=False,withConfidence=False,imWidth=0,imHeight=0):
     """
     Validate the format of the line. If the line is not valid an exception will be raised.
     If maxWidth and maxHeight are specified, all points must be inside the imgage bounds.
@@ -129,6 +129,12 @@ def get_tl_line_values(line,LTRB=True,withTranscription=False,withConfidence=Fal
     LTRB=False: x1,y1,x2,y2,x3,y3,x4,y4[,confidence][,transcription] 
     Returns values from a textline. Points , [Confidences], [Transcriptions]
     """
+
+    if withTranscription:
+        line = ",".join(data[:-1]) + ",transcription"
+    else:
+        line = ",".join(data)
+
     confidence = 0.0
     transcription = "";
     points = []
@@ -258,18 +264,17 @@ def get_tl_line_values_from_file_contents(content,CRLF=True,LTRB=True,withTransc
     xmin,ymin,xmax,ymax,[confidence],[transcription]
     x1,y1,x2,y2,x3,y3,x4,y4,[confidence],[transcription]
     """
+    import csv
+    from io import StringIO
+
     pointsList = []
     transcriptionsList = []
     confidencesList = []
-    
-    lines = content.split( "\r\n" if CRLF else "\n" )
-    for line in lines:
-        line = line.replace("\r","").replace("\n","")
-        if(line != "") :
-            points, confidence, transcription = get_tl_line_values(line,LTRB,withTranscription,withConfidence,imWidth,imHeight);
-            pointsList.append(points)
-            transcriptionsList.append(transcription)
-            confidencesList.append(confidence)
+    for data in csv.reader(StringIO(content)):
+        points, confidence, transcription = get_tl_line_values(data, LTRB, withTranscription, withConfidence, imWidth, imHeight)
+        pointsList.append(points)
+        transcriptionsList.append(transcription)
+        confidencesList.append(confidence)
 
     if withConfidence and len(confidencesList)>0 and sort_by_confidences:
         import numpy as np

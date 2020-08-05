@@ -307,7 +307,9 @@ def evaluate_method(gtFilePath, submFilePath, evaluationParams):
 
         evaluationLog = ""
         
-        pointsList,_,transcriptionsList = rrc_evaluation_funcs.get_tl_line_values_from_file_contents(gtFile,evaluationParams['CRLF'],evaluationParams['LTRB'],True,False)
+        pointsList, _, transcriptionsList = rrc_evaluation_funcs.get_tl_line_values_from_file_contents(
+            gtFile, evaluationParams['CRLF'], evaluationParams['LTRB'], True, False
+        )
         for n in range(len(pointsList)):
             points = pointsList[n]
             transcription = transcriptionsList[n]
