@@ -41,4 +41,4 @@ sample_params = json.loads("""{"recall":{"long_name":"Recall","type":"double","o
 #Parameters to ask for for each submition
 submit_params = json.loads("""{}""")
 #Regular expression to get the Sample ID from the image name. ID must be the first capturing group.
-image_name_to_id_str = '*([0-9]+)*.(jpg|gif|png)'
+image_name_to_id_str = '*([0-9]+)*.(jpg|gif|png|tif)'
