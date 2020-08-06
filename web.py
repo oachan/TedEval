@@ -32,7 +32,7 @@ def image_name_to_id(name):
     # if m == None:
     #     return False
     # id = m.group(1)
-    id = name.replace('.jpg', '').replace('.png', '').replace('.gif', '').replace('.bmp', '')
+    id = name.replace('.jpg', '').replace('.png', '').replace('.gif', '').replace('.bmp', '').replace('.tif', '')
     return id
 
 
