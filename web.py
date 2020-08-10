@@ -32,7 +32,7 @@ def image_name_to_id(name):
     # if m == None:
     #     return False
     # id = m.group(1)
-    id = name.replace('.jpg', '').replace('.png', '').replace('.gif', '').replace('.bmp', '').replace('.tif', '')
+    id = name.replace('.jpg', '').replace('.png', '').replace('.gif', '').replace('.bmp', '')
     return id
 
 
@@ -509,7 +509,7 @@ def delete_method():
     dbPath = os.path.dirname(os.path.abspath(__file__)) + "/output/submits"
     conn = sqlite3.connect(dbPath)
     cursor = conn.cursor()
-    cursor.execute('DELETE FROM submission WHERE id=?',(id))
+    cursor.execute('DELETE FROM submission WHERE id=?',(id,))
     conn.commit()
     conn.close()
     
