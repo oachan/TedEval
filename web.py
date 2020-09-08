@@ -556,9 +556,9 @@ if __name__=='__main__':
     import argparse
     parser = argparse.ArgumentParser(description='Flask web server.')
     parser.add_argument("-o", "--host", default='0.0.0.0',
-                        help="The web server host, default is 8080.")
+                        help="The web server host, default is 0.0.0.0")
     parser.add_argument("-p", "--port", default='8080',
-                        help="The web server port, default is 8080.")
+                        help="The web server port, default is 8080")
     args = parser.parse_args()
     
 
